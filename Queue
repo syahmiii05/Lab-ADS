@@ -1,0 +1,60 @@
+#include <iostream>
+#define MAX 5  // Maximum size of queue
+using namespace std;
+
+class Queue {
+private:
+    int arr[MAX];
+    int front, rear;
+
+public:
+    Queue() {
+        front = -1;
+        rear = -1;
+    }
+
+    // Enqueue function (add element to queue)
+    void enqueue(int value) {
+        if (rear == MAX - 1) {
+            cout << "Queue Overflow! Cannot enqueue " << value << endl;
+        } else {
+            if (front == -1)
+                front = 0;  // Set front to 0 on first insert
+            arr[++rear] = value;
+            cout << value << " enqueued to queue" << endl;
+        }
+    }
+
+    // Dequeue function (remove element from front)
+    void dequeue() {
+        if (front == -1 || front > rear) {
+            cout << "Queue Underflow! No elements to dequeue" << endl;
+        } else {
+            cout << arr[front++] << " dequeued from queue" << endl;
+        }
+    }
+
+    // Display function
+    void display() {
+        if (front == -1 || front > rear) {
+            cout << "Queue is empty" << endl;
+        } else {
+            cout << "Queue elements: ";
+            for (int i = front; i <= rear; i++)
+                cout << arr[i] << " ";
+            cout << endl;
+        }
+    }
+};
+
+int main() {
+    Queue q;
+    q.enqueue(10);
+    q.enqueue(20);
+    q.enqueue(30);
+    q.display();
+    q.dequeue();
+    q.display();
+
+    return 0;
+}
